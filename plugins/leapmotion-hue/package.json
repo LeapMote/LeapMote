@@ -9,5 +9,12 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
+    "node-hue-api": "^0.2.3"
+  },
+  "controls": {
+    "color": {
+      "type": "color-picker",
+      "display-name": "Hue Color"
+    }
   }
 }

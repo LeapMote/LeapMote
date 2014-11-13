@@ -1,22 +1,14 @@
-var fs = require('fs');
-var path = require('path');
-var winston = require('winston');
-var pluginLoader = require('pluginLoader');
+var loadPlugns = require('./pluginLoader.js');
+var logger = require('./logger.js');
 
-var logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)(),
-  ],
-  levels: {
-    error: 3,
-    warn: 2,
-    info: 1,
-    debug: 0
-  },
-  colors: {
-    error: 'red',
-    warn: 'yellow',
-    info: 'green',
-    debug: 'grey'
+loadPlugns(function(err, plugins){
+  if (err){
+    return logger.error(err);
   }
-})
+  logger.info('plugins successfully loaded');
+  logger.info('initializing plugins ...');
+  plugins.forEach(function(plugin){
+    logger.info('initializing %s ...', plugin.name);
+    plugin.init();
+  });
+});
