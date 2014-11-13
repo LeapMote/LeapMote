@@ -1,0 +1,11 @@
+{
+  "name": "LeapMote",
+  "description": "Control everything with Leap Motion",
+  "version": "0.0.0",
+  "main": "index.html",
+  "window" : {
+    "width" : 800,
+    "height" : 600,
+    "toolbar" : true
+  }
+}
