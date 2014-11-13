@@ -1,0 +1,22 @@
+{
+  "name": "LeapMote",
+  "version": "0.0.1",
+  "description": "leapRemoteProject =================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://Wuschli@github.com/LeapMote/LeapMote.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/LeapMote/LeapMote/issues"
+  },
+  "homepage": "https://github.com/LeapMote/LeapMote",
+  "dependencies": {
+    "winston": "^0.8.3"
+  }
+}
