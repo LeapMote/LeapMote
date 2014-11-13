@@ -9,6 +9,6 @@ loadPlugns(function(err, plugins){
   logger.info('initializing plugins ...');
   plugins.forEach(function(plugin){
     logger.info('initializing %s ...', plugin.name);
-    plugin.init();
+    plugin.setup();
   });
 });

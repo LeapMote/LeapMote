@@ -1,19 +1,34 @@
 var winston = require('winston');
 
-module.exports = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)(),
-  ],
-  levels: {
-    error: 3,
-    warn: 2,
-    info: 1,
-    debug: 0
-  },
-  colors: {
-    error: 'red',
-    warn: 'yellow',
-    info: 'green',
-    debug: 'grey'
+// winston.loggers.options.transports = [
+//   new (winston.transports.Console)({
+//     colorize: true,
+//   })
+// ];
+
+winston.setLevels({
+  error: 3,
+  warn: 2,
+  info: 1,
+  debug: 0
+});
+
+winston.addColors({
+  error: 'red',
+  warn: 'yellow',
+  info: 'green',
+  debug: 'grey'
+});
+
+winston.cli();
+
+var mainLogger = winston.loggers.add('main', {
+  console: {
+    label: 'main',
+    colorize: true,
+    timestamp: true
   }
 });
+
+
+module.exports = mainLogger;

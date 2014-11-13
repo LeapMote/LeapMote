@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var winston = require('winston');
 var logger = require('./logger.js');
 
 module.exports = function (cb){
@@ -18,6 +19,13 @@ module.exports = function (cb){
       var plugin = require(path.join(currentDir, pjson.main));
       plugin.controls = pjson.controls || {};
       plugin.name = pjson.name;
+      plugin.logger = winston.loggers.add(pjson.name, {
+        console: {
+          label: pjson.name,
+          colorize: true,
+          timestamp: true
+        }
+      });
       plugins.push(plugin);
     });
     return cb(null, plugins);
