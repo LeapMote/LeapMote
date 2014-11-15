@@ -6,7 +6,7 @@ var logger = require('./logger.js');
 module.exports = function (cb){
 
   var plugins = [];
-  var pluginsDirectory = path.join(__dirname, 'plugins');
+  var pluginsDirectory = path.join(__dirname, '..', 'plugins');
   logger.info('loading plugins from %s ...', pluginsDirectory);
   fs.readdir(pluginsDirectory, function(err, content){
     if (err){

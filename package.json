@@ -2,7 +2,7 @@
   "name": "LeapMote",
   "version": "0.0.1",
   "description": "leapRemoteProject =================",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/LeapMote/LeapMote",
   "dependencies": {
+    "leapjs": "^0.6.2",
     "winston": "^0.8.3"
   }
 }
