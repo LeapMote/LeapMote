@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>LeapMote</title>
   <link rel="stylesheet" href="css/style.css">
-  <script type="text/javascript" src="js/main.js"></script>
+
+  <!-- <script>
+  //   var document = window.document;
+  </script> -->
+  <!-- // <script src="bower_components/platform/platform.js"></script> -->
+  <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+
+  <link rel="import" href="components/controls-view.html">
+  <link rel="import" href="components/color-picker-control.html">
 </head>
-<body>
+
+<body fullbleed vertical layout center>
   <header>
     <h1>LeapMote</h1>
   </header>
 
-
-
   <img src="kartoffel.png" id="pointer" style="position:absolute;display:none;" />
+
+  <div flex horizontal layout center>
+    <controls-view id="controls-view">
+      <!-- TODO fill this with all the plugin controls -->
+      <color-picker-control></color-picker-control>
+    </controls-view>
+  </div>
 
   <footer>
     <p>Created by the KartoffelGroup</p>
@@ -21,7 +36,8 @@
 </body>
 
 <script>
-var main = require('./scripts/main.js');
-main();
+  var main = require('./scripts/main.js');
+  main();
 </script>
+
 </html>
