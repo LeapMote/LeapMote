@@ -3,23 +3,32 @@ var fs = require('fs');
 var winston = require('winston');
 var logger = require('./logger.js');
 
-module.exports = function (cb){
+module.exports = function(pluginsDirectory, cb) {
 
   var plugins = [];
-  var pluginsDirectory = path.join(__dirname, '..', 'plugins');
   logger.info('loading plugins from %s ...', pluginsDirectory);
-  fs.readdir(pluginsDirectory, function(err, content){
-    if (err){
+  fs.readdir(pluginsDirectory, function(err, content) {
+    if (err) {
       return cb(err, null);
     }
-    content.forEach(function(plugin){
-      var currentDir = path.join(pluginsDirectory, plugin);
-      var pjson = require(path.join(currentDir, '/package.json'));
+    content.forEach(function(pluginDirectory) {
+      var currentDir = path.join(pluginsDirectory, pluginDirectory);
+      var pjsonPath = path.join(currentDir, '/package.json');
+      if (!fs.existsSync(pjsonPath)) {
+        logger.warn('ignore %s because of missing package.json', pluginDirectory);
+        return;
+      }
+      var pjson = require(pjsonPath);
       logger.info('loading %s ...', pjson.name);
-      var plugin = require(path.join(currentDir, pjson.main));
+      var pluginPath = path.join(currentDir, pjson.main);
+      if (!fs.existsSync(pluginPath)) {
+        logger.warn('could not load %s', pluginPath);
+        return;
+      }
+      var plugin = require(pluginPath);
       plugin.controls = pjson.controls || {};
-      plugin.name = pjson.name;
-      plugin.logger = winston.loggers.add(pjson.name, {
+      plugin.name = pjson.name || pluginDirectory;
+      plugin.logger = winston.loggers.add(plugin.name, {
         console: {
           label: pjson.name,
           colorize: true,

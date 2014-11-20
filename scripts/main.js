@@ -1,9 +1,11 @@
 var loadPlugins = require('./pluginLoader.js');
 var logger = require('./logger.js');
 var FilterClass = require("./filter");
+var path = require('path');
 
 module.exports = function main(){
-  loadPlugins(function(err, plugins){
+  var pluginsDirectory = path.join(__dirname, '..', 'plugins');
+  loadPlugins(pluginsDirectory, function(err, plugins){
     if (err){
       return logger.error(err);
     }
