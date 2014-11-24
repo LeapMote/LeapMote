@@ -1,14 +1,94 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <polymer-element name="color-picker-control" noscript>
-  <template>
-    <div>
-      <p>
-        I am a colorpicker! Don't you see that?
-      </p>
-    </div>
-  </template>
-  <script>
+<template>
+	<style>
+.left, .right{
+	width: 45%;
+	margin: 0 2%;
+	position: absolute;
+	height: 100%;
+}
+.left{left: 2%;}
+.right{right: 2%;}
+/*Light Control*/
+.slider, .preview, .on_off{
+	box-shadow: 0 0 20px 0px rgba(0,0,0,0.15);
+	cursor: pointer;
+}
 
-  </script>
+.slider{
+	width: 96%;
+	height: 15%;
+	margin: 10% 0;
+}
+.red_gradient{
+	background-image: -webkit-linear-gradient(left, rgba(255,255,255,1), rgba(244,67,54,1));
+	background-image:    -moz-linear-gradient(left, rgba(255,255,255,1), rgba(244,67,54,1));
+	background-image:     -ms-linear-gradient(left, rgba(255,255,255,1), rgba(244,67,54,1));
+	background-image:      -o-linear-gradient(left, rgba(255,255,255,1), rgba(244,67,54,1));
+	background-image:         linear-gradient(left, rgba(255,255,255,1), rgba(244,67,54,1));
+}
+.green_gradient{
+	background-image: -webkit-linear-gradient(left, rgba(255,255,255,1), rgba(76,175,80,1));
+	background-image:    -moz-linear-gradient(left, rgba(255,255,255,1), rgba(76,175,80,1));
+	background-image:     -ms-linear-gradient(left, rgba(255,255,255,1), rgba(76,175,80,1));
+	background-image:      -o-linear-gradient(left, rgba(255,255,255,1), rgba(76,175,80,1));
+	background-image:         linear-gradient(left, rgba(255,255,255,1), rgba(76,175,80,1));
+}
+.blue_gradient{
+	background-image: -webkit-linear-gradient(left, rgba(255,255,255,1), rgba(33,150,243,1));
+	background-image:    -moz-linear-gradient(left, rgba(255,255,255,1), rgba(33,150,243,1));
+	background-image:     -ms-linear-gradient(left, rgba(255,255,255,1), rgba(33,150,243,1));
+	background-image:      -o-linear-gradient(left, rgba(255,255,255,1), rgba(33,150,243,1));
+	background-image:         linear-gradient(left, rgba(255,255,255,1), rgba(33,150,243,1));
+}
+.brightness_gradient{
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,1), rgba(255,255,255,1));
+	background-image:    -moz-linear-gradient(left, rgba(0,0,0,1), rgba(255,255,255,1));
+	background-image:     -ms-linear-gradient(left, rgba(0,0,0,1), rgba(255,255,255,1));
+	background-image:      -o-linear-gradient(left, rgba(0,0,0,1), rgba(255,255,255,1));
+	background-image:         linear-gradient(left, rgba(0,0,0,1), rgba(255,255,255,1));
+}
+.slider div{
+	width: 100%;
+	text-align: center;
+	position: relative;
+	top: 35%;
+}
+
+.preview, .on_off{
+	margin: 8% auto;
+	height: 40%;
+	width: 56%;
+	border-radius: 50%;
+}
+.preview{cursor: default;background-color: #FFFFFF;}
+.on_off{
+	background: #009688;
+}
+.on_off div{
+	font-size: 200%;
+	width: 100%;
+	text-align: center;
+	position: relative;
+	top: 30%;
+}
+	</style>
+	<div class="control">
+		<div class="left">
+			<div class="slider red_gradient"><div>RED</div></div>
+			<div class="slider green_gradient"><div>GREEN</div></div>
+			<div class="slider blue_gradient"><div>BLUE</div></div>
+			<div class="slider brightness_gradient"><div>LIGHT</div></div>
+		</div>
+		<div class="right">
+			<div class="preview"></div>
+			<div class="on_off"><div>ON/<br/>OFF</div></div>				
+		</div>
+	</div>
+</template>
+<script>
+
+</script>
 </polymer-element>
