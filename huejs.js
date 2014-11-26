@@ -307,8 +307,7 @@ HueJS = function(params){
       turnOn : turnOn,
       turnOff : turnOff,
       setHueSat : setHueSat,
-      setBri : setBri,
-      getColorValue:getColorValue
+      setBri : setBri
     };
 
     
