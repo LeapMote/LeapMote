@@ -18,7 +18,7 @@ header, footer{
 	width: 100%;
 	text-align: center;
 	background: #009688;
-	box-shadow: 0 0 5px 5px hsla(0,0%,0%,.15);	
+	box-shadow: 0 0 5px 5px hsla(0,0%,0%,.15);
 }
 
 header{
@@ -28,7 +28,7 @@ header h1{
 	margin: 10px;
 }
 
-footer{	
+footer{
 	bottom: 0px;
 	font-size: 0.90em;
 }
@@ -49,4 +49,17 @@ footer p {
 	overflow: scroll; /*to debug, overflow scroll, but not good*/
 }
 
+.click {
+	background: rgba(180, 180, 180, 0.9) !important;
+}
 
+#pointer {
+	position:absolute;
+	display:none;
+	z-index:15;
+	width:30px;
+	height:30px;
+	border-radius: 50%;
+	background: rgba(80, 80, 80, 0.9);
+	box-shadow: 0 0 5px 1px rgba(50, 50, 50, 1);
+}

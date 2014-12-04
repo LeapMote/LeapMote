@@ -1,12 +1,40 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="controls-view" noscript>
+<polymer-element name="controls-view" attributes="plugins">
   <template>
-    <div>
-      <content></content>
+    <div id="controls">
     </div>
   </template>
   <script>
+    Polymer({
+      plugins: [],
+      ready: function() {
 
+      },
+      pluginsChanged: function(oldValue, newValue) {
+        var controlsElement = this.$.controls;
+        controlsElement.innerHTML = "";
+        newValue.forEach(function(plugin) {
+          for (var key in plugin.controls) {
+            if (!plugin.controls[key].type) {
+              continue;
+            }
+            var elementTag = plugin.controls[key].type + '-control';
+            // console.log('create ' + elementTag + ' for ' + key);
+            var controlElement = document.createElement(elementTag);
+            controlElement.setAttribute('displayName', plugin.controls[key]['display-name']);
+
+            controlsElement.appendChild(controlElement);
+
+            var functionName = key + 'Changed';
+            if (typeof plugin[functionName] == 'function') {
+              controlElement.addEventListener('valueChanged', function(e) {
+                plugin[functionName](e);
+              });
+            }
+          }
+        });
+      }
+    });
   </script>
 </polymer-element>
