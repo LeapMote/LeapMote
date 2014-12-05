@@ -1,0 +1,127 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="music-control" attributes="displayName">
+  <template>
+    <style>
+      .controlImg {
+		  width:80px;
+		  margin:40px;
+	  }
+	  
+	  .songTitle {
+		  font-size:20px;
+		  text-align:center;
+		  font-weight:bold;
+		  margin:30px;
+	  }
+	  
+	  .musicControls {
+		  background:#444;
+		  margin:auto;
+		  width:500px;
+		  text-align:center;
+		  padding:20px;
+		  border-radius:5px;
+		  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
+	  }
+    </style>
+    
+	<div class="control">
+		<audio id="player"></audio>
+		
+		<div class="songTitle">{{songTitle}}</div>
+		
+		<div class="musicControls">
+			<img class="controlImg" onclick="previous();" src="../images/previous.png" />
+			<img class="controlImg" id="playpause" onclick="toggle();" src="../images/play.png" />
+			<img class="controlImg" onclick="next();" src="../images/next.png" />
+		</div>
+		
+	</div>
+    
+  </template>
+  <script>
+	  
+	var docRoot;
+	var polymer;
+	var player;
+	
+    Polymer({
+		domReady:function() {
+			docRoot = this.shadowRoot;
+			polymer=this;
+			player = docRoot.querySelector('#player');
+			
+			player.addEventListener('ended',function() { next(); },false);
+			
+			test();
+			
+		},
+    });
+
+	var music = {
+		playing:false,
+		currentIndex:0,
+	}
+	
+	var songs = [
+	{title:"Touch my tralala", file:"song1.ogg"},
+	{title:"Five hours", file:"song2.ogg"},
+	{title:"Nightcall", file:"song3.ogg"},
+	]
+	
+	function test() {
+		loadSong(0);
+		play();
+	}
+	
+	function loadSong(i) {
+		player.src="songs/"+songs[i].file;
+		player.load();
+		polymer.songTitle=songs[i].title;
+	}
+	
+	function play() {
+		music.playing=true;
+		player.play();
+		docRoot.querySelector('#playpause').src='images/pause.png';
+	}
+	
+	function pause() {
+		music.playing=false;
+		player.pause();
+		docRoot.querySelector('#playpause').src='images/play.png';
+	}
+	
+	function toggle() {
+		if (!music.playing) {
+			play();
+		} else {
+			pause();
+		}
+	}
+	
+	function previous() {
+		music.currentIndex--;
+		if (music.currentIndex < 0) {
+			music.currentIndex = songs.length-1;
+		}
+		loadSong(music.currentIndex);
+		play();
+	}
+	
+	function next() {
+		music.currentIndex++;
+		if (music.currentIndex == songs.length) {
+			music.currentIndex=0;
+		}
+		loadSong(music.currentIndex);
+		play();
+	}
+	
+	
+		
+	
+	
+  </script>
+</polymer-element>
