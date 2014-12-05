@@ -4,47 +4,94 @@
 <template>
   <style>
     #container{
-      width: 100%;
-      height: 100%;
-      position: relative;
-      background: yellow;
+      position: absolute;
+      top:0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1em;
+      justify-content: space-around;
+      align-items: center;
     }
     .launchpad_case{
-      width: 20%;
-      height: 20%;
-      margin: 2%;
+      width: 21%;
+      height: 22%;
+      background: #FFF;
+      box-shadow: 0 0 5px 1px hsla(0,0%,0%,.25);
+      cursor: pointer;
+    }
+    .launchpad_case.focus{
+      box-shadow: 0 0 10px 1px hsla(0,0%,0%,.35);
+    }
+    .launchpad_case.clicked{
+      background: #F0F0F0;
+      box-shadow: 0 0 15px 1px hsla(0,0%,0%,.45);
+    }
+    .launchpad_case.active{
+      background: #23E5F9;
+      box-shadow: 0 0 5px 1px hsla(0,0%,0%,.25);
     }
   </style>
 
   <div class="control">
     <div id="container">
-      <div class="launchpad_case" id="lp_1"></div>aaaa
-      <div class="launchpad_case" id="lp_2"></div>
-      <div class="launchpad_case" id="lp_3"></div>
-      <div class="launchpad_case" id="lp_4"></div>
-      <div class="launchpad_case" id="lp_5"></div>
-      <div class="launchpad_case" id="lp_6"></div>
-      <div class="launchpad_case" id="lp_7"></div>
-      <div class="launchpad_case" id="lp_8"></div>
-      <div class="launchpad_case" id="lp_9"></div>
-      <div class="launchpad_case" id="lp_10"></div>
-      <div class="launchpad_case" id="lp_11"></div>
-      <div class="launchpad_case" id="lp_12"></div>
-      <div class="launchpad_case" id="lp_13"></div>
-      <div class="launchpad_case" id="lp_14"></div>
-      <div class="launchpad_case" id="lp_15"></div>
-      <div class="launchpad_case" id="lp_16"></div>
+      <div class="launchpad_case" id="lp_1"  on-click="{{caseClick}}" ><audio id="audio_lp_1" ></audio></div>
+      <div class="launchpad_case" id="lp_2"  on-click="{{caseClick}}" ><audio id="audio_lp_2" ></audio></div>
+      <div class="launchpad_case" id="lp_3"  on-click="{{caseClick}}" ><audio id="audio_lp_3" ></audio></div>
+      <div class="launchpad_case" id="lp_4"  on-click="{{caseClick}}" ><audio id="audio_lp_4" ></audio></div>
+      <div class="launchpad_case" id="lp_5"  on-click="{{caseClick}}" ><audio id="audio_lp_5" ></audio></div>
+      <div class="launchpad_case" id="lp_6"  on-click="{{caseClick}}" ><audio id="audio_lp_6" ></audio></div>
+      <div class="launchpad_case" id="lp_7"  on-click="{{caseClick}}" ><audio id="audio_lp_7" ></audio></div>
+      <div class="launchpad_case" id="lp_8"  on-click="{{caseClick}}" ><audio id="audio_lp_8" ></audio></div>
+      <div class="launchpad_case" id="lp_9"  on-click="{{caseClick}}" ><audio id="audio_lp_9" ></audio></div>
+      <div class="launchpad_case" id="lp_10" on-click="{{caseClick}}" ><audio id="audio_lp_10"></audio></div>
+      <div class="launchpad_case" id="lp_11" on-click="{{caseClick}}" ><audio id="audio_lp_11"></audio></div>
+      <div class="launchpad_case" id="lp_12" on-click="{{caseClick}}" ><audio id="audio_lp_12"></audio></div>
+      <div class="launchpad_case" id="lp_13" on-click="{{caseClick}}" ><audio id="audio_lp_13"></audio></div>
+      <div class="launchpad_case" id="lp_14" on-click="{{caseClick}}" ><audio id="audio_lp_14"></audio></div>
+      <div class="launchpad_case" id="lp_15" on-click="{{caseClick}}" ><audio id="audio_lp_15"></audio></div>
+      <div class="launchpad_case" id="lp_16" on-click="{{caseClick}}" ><audio id="audio_lp_16"></audio></div>
     </div>
   </div>
 </template>
 <script>
-    Polymer({
-    //   eventDelegates: {
-    //     up: 'onChange'
-    //   },
-    //   onChange: function(){
-    //     this.fire('valueChanged', {value: 'I am a value :)'});
-    //   }
-    });
+  var docRoot;
+  var initialClass= "launchpad_case";
+  Polymer({
+    domReady:function(){
+      docRoot = this.shadowRoot;
+      loadSongs();
+    },
+    caseClick: function(event, detail, sender) {
+      toggle(event.target.id);
+    }
+  });
+
+  function loadSongs(){
+    for(i=1; i<17; i++){
+      var audio = docRoot.querySelector('#audio_lp_'+i);
+      audio.src="plugins/leapmote-launchpad/elements/"+i+".ogg";
+      audio.load();
+      audio.loop = true;
+    }
+  }
+  
+  function toggle(i) {
+    var audio = docRoot.querySelector('#audio_'+i);
+    var elem = docRoot.querySelector('#'+i);
+    if(audio.className == 'play'){
+      audio.className = "";
+      audio.pause();
+      elem.className= initialClass;
+    }else{
+      audio.className = "play";
+      audio.currentTime = 0;
+      audio.play();
+      elem.className= initialClass+" active";
+    }
+  }
+
 </script>
 </polymer-element>
