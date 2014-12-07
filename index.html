@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LeapMote</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- <script>
+  //   var document = window.document;
+  </script> -->
+  <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+
+  <link rel="import" href="components/controls-view.html">
+  <link rel="import" href="components/color-picker-control.html">
+</head>
+
+<body fullbleed vertical layout center>
+  <header>
+    <h1>LeapMote</h1>
+  </header>
+
+  <div id="pointer">
+  </div>
+
+  <div flex horizontal layout center>
+    <controls-view id="controls-view">
+    </controls-view>
+  </div>
+
+  <footer>
+    <p>Created by the KartoffelGroup</p>
+  </footer>
+
+</body>
+
+<script>
+  var main = require('./scripts/main.js');
+  window.addEventListener('polymer-ready', function(e) {
+    main(function(plugins) {
+      var controlsView = window.document.getElementById('controls-view');
+      controlsView.plugins = plugins;
+      window.addEventListener('left', function(e){
+        controlsView.selectPreviousControl();
+      });
+      window.addEventListener('right', function(e){
+        controlsView.selectNextControl();
+      });
+    });
+  });
+</script>
+
+</html>
