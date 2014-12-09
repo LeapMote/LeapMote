@@ -16,6 +16,8 @@
       pluginsChanged: function(oldValue, newValue) {
         var controlsElement = this.$.controls;
         controlsElement.innerHTML = "";
+        this.controlElements = [];
+        this.currentControl = 0;
         newValue.forEach(function(plugin) {
           for (var key in plugin.controls) {
             if (!plugin.controls[key].type) {
@@ -38,23 +40,33 @@
             controlElement.style.display = 'none';
           }
         }, this);
-        this.controlElements[this.currentControl].style.display = 'block';
+        if (this.controlElements[this.currentControl] && this.controlElements[this.currentControl].style) {
+          this.controlElements[this.currentControl].style.display = 'block';
+        }
       },
-      selectPreviousControl: function(){
-        this.controlElements[this.currentControl].style.display = 'none';
+      selectPreviousControl: function() {
+        if (this.controlElements[this.currentControl] && this.controlElements[this.currentControl].style) {
+          this.controlElements[this.currentControl].style.display = 'none';
+        }
         --this.currentControl;
-        if (this.currentControl < 0){
+        if (this.currentControl < 0) {
           this.currentControl = this.controlElements.length - 1;
         }
-        this.controlElements[this.currentControl].style.display = 'block';
+        if (this.controlElements[this.currentControl] && this.controlElements[this.currentControl].style) {
+          this.controlElements[this.currentControl].style.display = 'block';
+        }
       },
-      selectNextControl: function(){
-        this.controlElements[this.currentControl].style.display = 'none';
+      selectNextControl: function() {
+        if (this.controlElements[this.currentControl] && this.controlElements[this.currentControl].style) {
+          this.controlElements[this.currentControl].style.display = 'none';
+        }
         ++this.currentControl;
-        if (this.currentControl >= this.controlElements.length){
+        if (this.currentControl >= this.controlElements.length) {
           this.currentControl = 0;
         }
-        this.controlElements[this.currentControl].style.display = 'block';
+        if (this.controlElements[this.currentControl] && this.controlElements[this.currentControl].style) {
+          this.controlElements[this.currentControl].style.display = 'block';
+        }
       },
     });
   </script>
