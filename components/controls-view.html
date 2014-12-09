@@ -8,6 +8,8 @@
   <script>
     Polymer({
       plugins: [],
+      controlElements: [],
+      currentControl: 0,
       ready: function() {
 
       },
@@ -32,9 +34,28 @@
                 plugin[functionName](e);
               });
             }
+            this.controlElements.push(controlElement);
+            controlElement.style.display = 'none';
           }
-        });
-      }
+        }, this);
+        this.controlElements[this.currentControl].style.display = 'block';
+      },
+      selectPreviousControl: function(){
+        this.controlElements[this.currentControl].style.display = 'none';
+        --this.currentControl;
+        if (this.currentControl < 0){
+          this.currentControl = this.controlElements.length - 1;
+        }
+        this.controlElements[this.currentControl].style.display = 'block';
+      },
+      selectNextControl: function(){
+        this.controlElements[this.currentControl].style.display = 'none';
+        ++this.currentControl;
+        if (this.currentControl >= this.controlElements.length){
+          this.currentControl = 0;
+        }
+        this.controlElements[this.currentControl].style.display = 'block';
+      },
     });
   </script>
 </polymer-element>

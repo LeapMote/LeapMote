@@ -2,6 +2,7 @@ var loadPlugins = require('./pluginLoader.js');
 var logger = require('./logger.js');
 var FilterClass = require("./filter");
 var path = require('path');
+var keyboard_shortcuts = require('./keyboard-shortcuts');
 
 module.exports = function main(cb) {
   var pluginsDirectory = path.join(__dirname, '..', 'plugins');
@@ -21,6 +22,8 @@ module.exports = function main(cb) {
     if (cb)
       cb(plugins);
   });
+
+  keyboard_shortcuts();
 
   var f = new FilterClass.Filter();
   var pointer = window.document.getElementById('pointer');

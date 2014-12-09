@@ -3,10 +3,10 @@
   "description": "Control everything with Leap Motion",
   "version": "0.0.1",
   "main": "index.html",
-  "window" : {
-    "width" : 800,
-    "height" : 600,
-    "toolbar" : true
+  "window": {
+    "width": 800,
+    "height": 600,
+    "toolbar": true
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/LeapMote/LeapMote",
   "dependencies": {
     "leapjs": "^0.6.2",
+    "node-hue-api": "^0.2.3",
     "winston": "^0.8.3"
   }
 }
