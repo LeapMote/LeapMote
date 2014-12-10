@@ -12,30 +12,58 @@
 		  font-size:20px;
 		  text-align:center;
 		  font-weight:bold;
-		  margin:30px;
+	  }
+	  
+	  .songArtist {
+		  font-size:20px;
+		  text-align:center;
 	  }
 	  
 	  .musicControls {
-		  background:#444;
+		  background:#fff;
 		  margin:auto;
 		  width:500px;
 		  text-align:center;
 		  padding:20px;
 		  border-radius:5px;
-		  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
+		  box-shadow: 0 0 5px 1px hsla(0,0%,0%,.25);
 	  }
+	  
+	  .linker {
+		  height:30px;
+		  width:5px;
+		  background:hsla(0,0%,0%,.25);
+		  margin:auto;
+		  box-shadow: 0 0 5px 0px hsla(0,0%,0%,.25);
+		  z-index:-1;
+	  }
+	  
     </style>
     
 	<div class="control">
 		<audio id="player"></audio>
 		
-		<div class="songTitle">{{songTitle}}</div>
+		
 		
 		<div class="musicControls">
 			<img class="controlImg" onclick="previous();" src="../images/previous.png" />
 			<img class="controlImg" id="playpause" onclick="toggle();" src="../images/play.png" />
 			<img class="controlImg" onclick="next();" src="../images/next.png" />
 		</div>
+		
+		<div class="linker"></div>
+		
+		<div class="musicControls">
+			<div class="songArtist">{{songArtist}}</div>
+		</div>
+		
+		<div class="linker"></div>
+		
+		<div class="musicControls">
+			<div class="songTitle">{{songTitle}}</div>
+		</div>
+		
+		
 		
 	</div>
     
@@ -50,11 +78,11 @@
 		domReady:function() {
 			docRoot = this.shadowRoot;
 			polymer=this;
-			player = docRoot.querySelector('#player');
+			player = polymer.$.player;
 			
 			player.addEventListener('ended',function() { next(); },false);
 			
-			test();
+			init();
 			
 		},
     });
@@ -65,32 +93,33 @@
 	}
 	
 	var songs = [
-	{title:"Touch my tralala", file:"song1.ogg"},
-	{title:"Five hours", file:"song2.ogg"},
-	{title:"Nightcall", file:"song3.ogg"},
+	{artist:"Gunther", title:"Ding Dong Song", file:"song1.ogg"},
+	{artist:"Deorro", title:"Five hours", file:"song2.ogg"},
+	{artist:"Kavinsky", title:"Nightcall", file:"song3.ogg"},
 	]
 	
-	function test() {
+	function init() {
 		loadSong(0);
-		play();
+		//play();
 	}
 	
 	function loadSong(i) {
 		player.src="songs/"+songs[i].file;
 		player.load();
 		polymer.songTitle=songs[i].title;
+		polymer.songArtist=songs[i].artist;
 	}
 	
 	function play() {
 		music.playing=true;
 		player.play();
-		docRoot.querySelector('#playpause').src='images/pause.png';
+		polymer.$.playpause.src='images/pause.png';
 	}
 	
 	function pause() {
 		music.playing=false;
 		player.pause();
-		docRoot.querySelector('#playpause').src='images/play.png';
+		polymer.$.playpause.src='images/play.png';
 	}
 	
 	function toggle() {
