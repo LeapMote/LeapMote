@@ -16,10 +16,17 @@ module.exports = {
 		this.logger.info('setting up');
 	},
 	colorChanged: function(e){
-		this.logger.info('New HUE : '+e.detail.red+','+e.detail.green+','+e.detail.blue+','+e.detail.br);
-		state = lightState.create().on().rgb(e.detail.red, e.detail.green, e.detail.blue).brightness(e.detail.br);
-		api.setLightState(2, state)
-		.then(displayResult)
-		.done();
+		var red = e.detail.red,
+			green = e.detail.green,
+			blue = e.detail.blue,
+			br = e.detail.br;
+
+		if(br==0)
+			state = lightState.create().off().rgb(red, green, blue).brightness(br);
+		else if(-1==red)
+			state = lightState.create().on().effect('colorloop');	
+		else				
+			state = lightState.create().on().rgb(red, green, blue).brightness(br);						
+		api.setLightState(2, state).done
 	},
 };

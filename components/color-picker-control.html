@@ -84,6 +84,26 @@
         position: relative;
         top: 30%;
       }
+      .rainbow{
+        position: absolute;
+        top: 44%;
+        right: 10px;
+        padding: 25px;
+        color: #FFF;
+        border-radius: 50%;
+        cursor:pointer;
+        background: #000;
+      }
+      .rainbow:hover, .rainbowFiling{
+        background-image: -webkit-gradient(linear,  left top,  left bottom, 
+          color-stop(0.00, red), 
+          color-stop(16%, orange),
+          color-stop(32%, yellow),
+          color-stop(48%, green),
+          color-stop(60%, blue),
+          color-stop(76%, indigo),
+          color-stop(1.00, violet));
+      }
     </style>
     <div class="control">
       <div class="left">
@@ -103,7 +123,8 @@
       </div>
       <div class="right">
         <div id="preview" class="preview"></div>
-        <div class="on_off">
+        <div id="rainbow" class="rainbow" on-click="{{RainbowClick}}">...</div>
+        <div class="on_off" on-click="{{OnOffClick}}">
           <div>ON/
             <br/>OFF</div>
         </div>
@@ -111,14 +132,22 @@
     </div>
   </template>
   <script>
-    var red = 255,
-        green = 255,
-        blue = 255,
+    var red = 254,
+        green = 254,
+        blue = 254,
         br = 100;
+    var on = true,
+        rainbow = true;
 
     Polymer({
       LightClick: function(event, detail, sender) {
         var value = (event.clientX - (event.target.offsetParent.offsetLeft + event.target.offsetParent.offsetParent.offsetLeft))/event.target.clientWidth;
+
+        if(rainbow){
+            rainbow= false;
+            this.fire('valueChanged', {red: red, green: green, blue: blue, br: 0});
+            this.$.preview.className = "preview";
+        }
 
         switch(sender.id){
           case 'slider_red':
@@ -137,7 +166,23 @@
         this.fire('valueChanged', {red: red, green: green, blue: blue, br: br});
         
         //Update preview:
-        this.$.preview.backgroundColor = "rgba("+red+","+green+","+blue+","+br+")";
+        console.log("rgb("+red+","+green+","+blue+")");
+        this.$.preview.style.backgroundColor = "rgb("+red+","+green+","+blue+")";
+        this.$.preview.style.opacity = br;
+      },
+      OnOffClick: function(event, detail, sender){
+        if(on){
+          this.fire('valueChanged', {red: red, green: green, blue: blue, br: 0});
+          on = false;
+        }else{          
+          this.fire('valueChanged', {red: red, green: green, blue: blue, br: br});
+          on = true;
+        }
+      },
+      RainbowClick: function(event, detail, sender){
+        this.fire('valueChanged', {red: -1, green: -1, blue: -1, br: -1});
+        rainbow = true;
+        this.$.preview.className = "preview rainbowFiling";
       }
     });
 
