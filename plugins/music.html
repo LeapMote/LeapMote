@@ -1,0 +1,136 @@
+    <style>
+      .controlImg {
+		  width:80px;
+		  margin:40px;
+	  }
+	  
+	  .songTitle {
+		  font-size:20px;
+		  text-align:center;
+		  font-weight:bold;
+	  }
+	  
+	  .songArtist {
+		  font-size:20px;
+		  text-align:center;
+	  }
+	  
+	  .musicControls {
+		  background:#fff;
+		  margin:auto;
+		  width:500px;
+		  text-align:center;
+		  padding:20px;
+		  border-radius:5px;
+		  box-shadow: 0 0 5px 1px hsla(0,0%,0%,.25);
+	  }
+	  
+	  .linker {
+		  height:30px;
+		  width:5px;
+		  background:hsla(0,0%,0%,.25);
+		  margin:auto;
+		  box-shadow: 0 0 5px 0px hsla(0,0%,0%,.25);
+		  z-index:-1;
+	  }
+	  
+    </style>
+    
+
+		<audio id="player"></audio>
+		
+		
+		<div class="musicControls">
+			<img class="controlImg" onclick="plugin.previous();" src="images/previous.png" />
+			<img class="controlImg" id="playpause" onclick="plugin.toggle();" src="images/play.png" />
+			<img class="controlImg" onclick="plugin.next();" src="images/next.png" />
+		</div>
+		
+		<div class="linker"></div>
+		
+		<div class="musicControls">
+			<div id="songArtist" class="songArtist"></div>
+		</div>
+		
+		<div class="linker"></div>
+		
+		<div class="musicControls">
+			<div id="songTitle" class="songTitle"></div>
+		</div>
+		
+
+
+  <script>
+
+window.plugin = {
+	
+	title:"Music running around naked",
+	
+	init: function() {
+		console.log("Music init");
+		window.document.getElementById('player').addEventListener('ended',function() { window.plugins.plugin_music.next(); },false);
+		this.loadSong(0);
+	},
+	
+	songs : [
+		{artist:"Kavinsky", title:"Nightcall", file:"song3.ogg"},
+		{artist:"Gunther", title:"Ding Dong Song", file:"song1.ogg"},
+		{artist:"Deorro", title:"Five hours", file:"song2.ogg"},
+	],
+	
+	music: {
+		playing:false,
+		currentIndex:0,
+	},
+	
+	loadSong: function(i) {
+		window.document.getElementById('player').src="songs/"+this.songs[i].file;
+		window.document.getElementById('player').load();
+		//$('#songArtist').html(this.songs[i].artist);
+		//$('#songTitle').html(this.songs[i].title);
+		window.document.getElementById('songArtist').innerHTML=this.songs[i].artist;
+		window.document.getElementById('songTitle').innerHTML=this.songs[i].title;
+	},
+	
+	toggle: function() {
+		if (!this.music.playing) {
+			this.play();
+		} else {
+			this.pause();
+		}
+	},
+	
+	play: function() {
+		this.music.playing=true;
+		window.document.getElementById('player').play();
+		window.document.getElementById('playpause').src='images/pause.png';
+	},
+	
+	pause: function() {
+		this.music.playing=false;
+		window.document.getElementById('player').pause();
+		window.document.getElementById('playpause').src='images/play.png';
+	},
+	
+	previous: function() {
+		this.music.currentIndex--;
+		if (this.music.currentIndex < 0) {
+			this.music.currentIndex = this.songs.length-1;
+		}
+		this.loadSong(this.music.currentIndex);
+		this.play();
+	},
+	
+	next: function() {
+		this.music.currentIndex++;
+		if (this.music.currentIndex == this.songs.length) {
+			this.music.currentIndex=0;
+		}
+		this.loadSong(this.music.currentIndex);
+		this.play();
+	}
+	
+};
+
+
+  </script>

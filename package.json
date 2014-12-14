@@ -1,0 +1,28 @@
+{
+  "name": "LeapMote",
+  "description": "Control everything with Leap Motion",
+  "version": "0.0.1",
+  "main": "index.html",
+  "window" : {
+	"toolbar":false,
+	"width":800,
+	"height":600,
+	"kiosk":true
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://Wuschli@github.com/LeapMote/LeapMote.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/LeapMote/LeapMote/issues"
+  },
+  "homepage": "https://github.com/LeapMote/LeapMote",
+  "dependencies": {
+    "leapjs": "^0.6.2"
+  }
+}

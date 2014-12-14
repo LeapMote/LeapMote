@@ -1,0 +1,53 @@
+<style>
+	#kartoffel {
+		position:absolute;
+	}
+	
+	#counter {
+		font-size:100px;
+		z-index:100;
+	}
+</style>
+<div id="counter"></div>
+<img src="images/kartoffel.png" onclick="plugin.hit()" id="kartoffel" />
+
+<script>
+window.plugin = {
+	title:"Catch the Kartoffel",	
+	score:0,
+	
+	kartoffel:undefined,
+	kartoffelPending:false,
+	
+	init: function() {
+		console.log("Kartoffel init");
+		this.kartoffel=window.document.getElementById('kartoffel');
+		window.setInterval(window.plugin.interval,1000);
+		this.updateScore();
+	},
+	
+	interval: function() {
+		window.plugin.kartoffelPending=false;
+		window.document.getElementById('pluginContainer').style.background='transparent';
+		X=Math.random()*(window.document.getElementById('pluginContainer').offsetWidth-this.kartoffel.offsetWidth);
+		Y=Math.random()*(window.document.getElementById('pluginContainer').offsetHeight-this.kartoffel.offsetHeight);
+		window.document.getElementById('kartoffel').style.top=Math.round(Y)+"px";
+		window.document.getElementById('kartoffel').style.left=Math.round(X)+"px";
+		//this.kartoffel.obj.style.left="500px";
+	},
+	
+	updateScore: function() {
+		window.document.getElementById('counter').innerHTML=this.score;
+	},
+	
+	hit: function() {
+		if (this.kartoffelPending) {
+			return;
+		}
+		this.score++;
+		this.updateScore();
+		this.kartoffelPending=true;
+		window.document.getElementById('pluginContainer').style.background='white';
+	},
+}
+</script>

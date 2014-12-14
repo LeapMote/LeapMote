@@ -1,0 +1,76 @@
+body {
+	font-family: "Roboto", "Lucida Grande", Helvetica, Arial, sans-serif;
+	background: #E0F2F1;
+	margin: 0px;
+	overflow:hidden;
+}
+.left, .right{
+	width: 45%;
+	margin: 0 2%;
+	height: 100%;
+}
+.left{float: left;}
+.right{float: right;}
+
+
+/* Header And Footer */
+header, footer{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	background: #009688;
+	box-shadow: 0 0 5px 5px hsla(0,0%,0%,.15);
+}
+
+header{
+	top: 0px;
+}
+header h1{
+	margin: 10px;
+	text-transform:uppercase;
+}
+
+footer{
+	bottom: 0px;
+	font-size: 0.90em;
+}
+footer p {
+	margin: 5px;
+}
+
+#pluginContainer {
+background: rgba(0,0,0,0.025);
+	position: absolute;
+	top: 13%;
+	bottom: 8%;
+	left: 3%;
+	right: 3%;
+	padding: 5px 15px;
+}
+
+/* Control */
+#controls-view{
+	background: rgba(0,0,0,0.025);
+	position: absolute;
+	top: 13%;
+	bottom: 8%;
+	left: 3%;
+	right: 3%;
+	padding: 5px 15px;
+	overflow: scroll; /*to debug, overflow scroll, but not good*/
+}
+
+.click {
+	background: rgba(180, 180, 180, 0.9) !important;
+}
+
+#pointer {
+	position:absolute;
+	display:none;
+	z-index:15;
+	width:30px;
+	height:30px;
+	border-radius: 50%;
+	background: rgba(80, 80, 80, 0.9);
+	box-shadow: 0 0 5px 1px rgba(50, 50, 50, 1);
+}

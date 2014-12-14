@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LeapMote</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+     //var document = window.document;
+  </script> 
+
+<script>
+		var $ = require('jquery');
+		global.$=$;
+  var main = require('./scripts/main.js');
+  
+  var test=42;
+  </script>
+
+</head>
+
+<body>
+  <header>
+    <h1 id="title">LeapMote</h1>
+  </header>
+
+
+
+  <div id="pointer">
+  </div>
+
+  <div id="pluginContainer">
+  </div>
+
+  <footer>
+    <p>Created by the KartoffelGroup</p>
+  </footer>
+
+</body>
+
+<script>
+	
+	window.plugins = new Array();
+
+  main(function(plugins) {
+	  plugins.forEach(function(plugin) {
+	  $('#pluginContainer').append("<div style='display:none;' id='plugin_"+plugin.name+"'>PLOP</div>");
+		$('#plugin_'+plugin.name).html(plugin.data);
+		window.plugins['plugin_'+plugin.name]=window.plugin;
+		window.plugin.init();
+		//window.document.getElementById('plugin_'+plugin.name).innerHTML=plugin.data;
+	});
+	  
+	  });
+</script>
+
+</html>

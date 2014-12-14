@@ -1,0 +1,91 @@
+  <style>
+    #container{
+      position: absolute;
+      top:0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1em;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .launchpad_case{
+      width: 21%;
+      height: 22%;
+      background: #FFF;
+      box-shadow: 0 0 5px 1px hsla(0,0%,0%,.25);
+      cursor: pointer;
+    }
+    .launchpad_case.focus{
+      box-shadow: 0 0 10px 1px hsla(0,0%,0%,.35);
+    }
+    .launchpad_case.clicked{
+      background: #F0F0F0;
+      box-shadow: 0 0 15px 1px hsla(0,0%,0%,.45);
+    }
+    .launchpad_case.active{
+      background: #23E5F9;
+      box-shadow: 0 0 5px 1px hsla(0,0%,0%,.25);
+    }
+  </style>
+
+  
+    <div id="container">
+      <div class="launchpad_case" id="lp_1"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_1" ></audio></div>
+      <div class="launchpad_case" id="lp_2"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_2" ></audio></div>
+      <div class="launchpad_case" id="lp_3"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_3" ></audio></div>
+      <div class="launchpad_case" id="lp_4"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_4" ></audio></div>
+      <div class="launchpad_case" id="lp_5"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_5" ></audio></div>
+      <div class="launchpad_case" id="lp_6"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_6" ></audio></div>
+      <div class="launchpad_case" id="lp_7"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_7" ></audio></div>
+      <div class="launchpad_case" id="lp_8"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_8" ></audio></div>
+      <div class="launchpad_case" id="lp_9"  onclick="plugin.toggle(this.id);" ><audio id="audio_lp_9" ></audio></div>
+      <div class="launchpad_case" id="lp_10" onclick="plugin.toggle(this.id);" ><audio id="audio_lp_10"></audio></div>
+      <div class="launchpad_case" id="lp_11" onclick="plugin.toggle(this.id);" ><audio id="audio_lp_11"></audio></div>
+      <div class="launchpad_case" id="lp_12" onclick="plugin.toggle(this.id);" ><audio id="audio_lp_12"></audio></div>
+      <div class="launchpad_case" id="lp_13" onclick="plugin.toggle(this.id);" ><audio id="audio_lp_13"></audio></div>
+      <div class="launchpad_case" id="lp_14" onclick="plugin.toggle(this.id);" ><audio id="audio_lp_14"></audio></div>
+      <div class="launchpad_case" id="lp_15" onclick="plugin.toggle(this.id);" ><audio id="audio_lp_15"></audio></div>
+      <div class="launchpad_case" id="lp_16" onclick="plugin.toggle(this.id);" ><audio id="audio_lp_16"></audio></div>
+    </div>
+
+<script>
+  window.plugin = {
+	  
+	  title:"DJ forever",
+	  
+	  init: function() {
+		  
+		for(i=1; i<17; i++){
+		  var audio = window.document.getElementById('audio_lp_'+i);
+		  audio.src="elements/"+i+".ogg";
+		  audio.load();
+		  audio.loop = true;  
+		}
+	  },
+	  
+
+	  
+	  toggle: function(i) {
+		  var initialClass="launchpad_case";
+		   var audio = window.document.getElementById('audio_'+i);
+		   var elem = window.document.getElementById(i);
+		   if(audio.className == 'play'){
+			  audio.className = "";
+			  audio.pause();
+			  elem.className= initialClass;
+			}else{
+			  audio.className = "play";
+			  audio.currentTime = 0;
+			  audio.play();
+			  elem.className= initialClass+" active";
+			}
+	  }
+	  
+	  
+  }
+
+
+</script>
