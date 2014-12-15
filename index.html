@@ -6,14 +6,14 @@
   <link rel="stylesheet" href="css/style.css">
   <script>
      //var document = window.document;
-  </script> 
+   </script> 
 
-<script>
-		var $ = require('jquery');
-		global.$=$;
-  var main = require('./scripts/main.js');
-  
-  var test=42;
+   <script>
+    var $ = require('jquery');
+    global.$=$;
+    var main = require('./scripts/main.js');
+    
+    var test=42;
   </script>
 
 </head>
@@ -42,15 +42,15 @@
 	window.plugins = new Array();
 
   main(function(plugins) {
-	  plugins.forEach(function(plugin) {
-	  $('#pluginContainer').append("<div style='display:none;' id='plugin_"+plugin.name+"'>PLOP</div>");
-		$('#plugin_'+plugin.name).html(plugin.data);
-		window.plugins['plugin_'+plugin.name]=window.plugin;
-		window.plugin.init();
+   plugins.forEach(function(plugin) {
+     $('#pluginContainer').append("<div style='display:none;' id='plugin_"+plugin.name+"'>PLOP</div>");
+     $('#plugin_'+plugin.name).html(plugin.data);
+     window.plugins['plugin_'+plugin.name]=window.plugin;
+     window.plugin.init();
 		//window.document.getElementById('plugin_'+plugin.name).innerHTML=plugin.data;
 	});
-	  
-	  });
+   
+ });
 </script>
 
 </html>

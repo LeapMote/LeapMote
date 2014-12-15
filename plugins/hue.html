@@ -1,275 +1,213 @@
-    <style>
-      .left,
-      .right {
-        width: 45%;
-        margin: 0 2%;
-        position: absolute;
-        height: 100%;
-      }
-      .left {
-        left: 2%;
-      }
-      .right {
-        right: 2%;
-      }
-      /*Light Control*/
-
-      .slider,
-      .preview,
-      .on_off {
-        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
-        cursor: pointer;
-      }
-      .slider {
-        width: 96%;
-        height: 15%;
-        margin: 10% 0;
-      }
-      .red_gradient {
-        background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
-        background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
-        background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
-        background-image: -o-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
-        background-image: linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
-      }
-      .green_gradient {
-        background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
-        background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
-        background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
-        background-image: -o-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
-        background-image: linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
-      }
-      .blue_gradient {
-        background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
-        background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
-        background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
-        background-image: -o-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
-        background-image: linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
-      }
-      .brightness_gradient {
-        background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
-        background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
-        background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
-        background-image: -o-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
-        background-image: linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
-      }
-      .slider div {
-        width: 100%;
-        text-align: center;
-        position: relative;
-        top: 35%;
-      }
-      .on_off,
-      #preview_back {
-        margin: 8% auto;
-        height: 40%;
-        width: 56%;
-        border-radius: 50%;
-        overflow: hidden;
-      }
-      .preview {
-        cursor: default;
-        background-color: #FFFFFF;
-        width: 100%;
-        height: 100%;
-      }
-      #preview_back {
-		  background: #999;
-	  }
-      .on_off {
-        background: #009688;
-      }
-      .on_off div {
-        font-size: 200%;
-        width: 100%;
-        text-align: center;
-        position: relative;
-        top: 30%;
-      }
-      .rainbow{
-        position: absolute;
-        top: 44%;
-        right: 10px;
-        padding: 25px;
-        color: #FFF;
-        border-radius: 50%;
-        cursor:pointer;
-        background: #000;
-      }
-      .rainbow:hover, .rainbowFiling{
-        background-image: -webkit-gradient(linear,  left top,  left bottom, 
-          color-stop(0.00, red), 
-          color-stop(16%, orange),
-          color-stop(32%, yellow),
-          color-stop(48%, green),
-          color-stop(60%, blue),
-          color-stop(76%, indigo),
-          color-stop(1.00, violet));
-      }
-    </style>
-    <div class="control">
-      <div class="left">
-        <div id="slider_red" class="slider red_gradient" onclick="plugin.lightClick(event)">
-        </div>
-        <div id="slider_green" class="slider green_gradient" onclick="plugin.lightClick(event);">
-        </div>
-        <div id="slider_blue" class="slider blue_gradient" onclick="plugin.lightClick(event);">
-        </div>
-        <div id="slider_light" class="slider brightness_gradient" onclick="plugin.lightClick(event);">
-        </div>
-      </div>
-      <div class="right">
-        <div id="preview_back"><div id="preview" class="preview"></div></div>
-        <div id="rainbow" class="rainbow" onclick="plugin.rainbowClick(event);">...</div>
-        <div class="on_off" onclick="plugin.onOffClick(event);">
-          <div>ON/
-            <br/>OFF</div>
-        </div>
+<style>
+  .left,
+  .right {
+    width: 45%;
+    margin: 0 2%;
+    position: absolute;
+    height: 100%;
+  }
+  .left {
+    left: 2%;
+  }
+  .right {
+    right: 2%;
+  }
+  .slider,
+  .preview,
+  .on_off {
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+  .slider {
+    width: 96%;
+    height: 15%;
+    margin: 10% 0;
+  }
+  .red_gradient {
+    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
+    background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
+    background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
+    background-image: linear-gradient(left, rgba(255, 255, 255, 1), rgba(244, 67, 54, 1));
+  }
+  .green_gradient {
+    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
+    background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
+    background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
+    background-image: linear-gradient(left, rgba(255, 255, 255, 1), rgba(76, 175, 80, 1));
+  }
+  .blue_gradient {
+    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
+    background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
+    background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
+    background-image: linear-gradient(left, rgba(255, 255, 255, 1), rgba(33, 150, 243, 1));
+  }
+  .brightness_gradient {
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    background-image: linear-gradient(left, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+  }
+  .slider div {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 35%;
+  }
+  .on_off,
+  #preview_back {
+    margin: 8% auto;
+    height: 40%;
+    width: 56%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .preview {
+    cursor: default;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+  }
+  #preview_back {
+    background: #999;
+  }
+  .on_off {
+    background: #009688;
+  }
+  .on_off div {
+    font-size: 200%;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 30%;
+  }
+  .rainbow{
+    position: absolute;
+    top: 44%;
+    right: 10px;
+    padding: 25px;
+    color: #FFF;
+    border-radius: 50%;
+    cursor:pointer;
+    background: #000;
+  }
+  .rainbow:hover, .rainbowFiling{
+    background-image: -webkit-gradient(linear,  left top,  left bottom, 
+      color-stop(0.00, red), 
+      color-stop(16%, orange),
+      color-stop(32%, yellow),
+      color-stop(48%, green),
+      color-stop(60%, blue),
+      color-stop(76%, indigo),
+      color-stop(1.00, violet));
+  }
+</style>
+<div class="control">
+  <div class="left">
+    <div id="slider_red" class="slider red_gradient" onclick="plugin.lightClick(event)">
+    </div>
+    <div id="slider_green" class="slider green_gradient" onclick="plugin.lightClick(event);">
+    </div>
+    <div id="slider_blue" class="slider blue_gradient" onclick="plugin.lightClick(event);">
+    </div>
+    <div id="slider_light" class="slider brightness_gradient" onclick="plugin.lightClick(event);">
+    </div>
+  </div>
+  <div class="right">
+    <div id="preview_back"><div id="preview" class="preview"></div></div>
+    <div id="rainbow" class="rainbow" onclick="plugin.rainbowClick(event);">...</div>
+    <div class="on_off" onclick="plugin.onOffClick(event);">
+      <div>ON/
+        <br/>OFF</div>
       </div>
     </div>
+  </div>
 
   <script>
-	  
-	  window.plugin = {
-		  
-		 title:"Hue me up",
-		  
-		   host:"192.168.1.99",
-			username:"1ce4f66515af39672026123122691893",
-			api:undefined,
-			state:undefined,
-			HueApi: undefined,
-			lightState: undefined,
-			rainbow: false,
-			blue: 254,
-			green: 254,
-			red: 254,
-			br: 100,
-			on: true,
-		  
-		  init: function() {
-			  
-			   var hue=require("node-hue-api");
-				this.HueApi = hue.HueApi;
-				this.lightState = hue.lightState;
-			  this.api=new this.HueApi(this.host, this.username);
-		  },
-		  lightClick: function(event){
-			var pointer = window.document.getElementById('pointer');
-			if (pointer.style.display == 'block') {
-				var position = pointer.offsetLeft + pointer.clientWidth/2;
-			} else {
-				var position = event.clientX;
-			}
-			var value = (position - (event.target.offsetParent.offsetLeft + event.target.offsetParent.offsetParent.offsetLeft))/event.target.clientWidth;
-			
-			
-			if(this.rainbow){
-            this.rainbow= false;
-            this.state = this.lightState.create().off().rgb(this.red, this.green, this.blue).brightness(this.br);
-			this.api.setLightState(2, this.state).done
-             window.document.getElementById('preview').className = "preview";
-        }
+   window.plugin = {
 
-		var ident = event.target.id || event.target.parentNode.id; 
-        switch(event.target.id){
-          case 'slider_red':
-            this.red = Math.round(254*value);
-            break;
-          case 'slider_green':
-            this.green = Math.round(254*value);
-            break;
-          case 'slider_blue':
-            this.blue = Math.round(254*value);
-            break;
-          case 'slider_light':
-            this.br = Math.round(100*value);
-            break;
-        }
-        
-			this.state = this.lightState.create().on().rgb(this.red, this.green, this.blue).brightness(this.br);
-			this.api.setLightState(2, this.state).done;
-			window.document.getElementById('preview').style.backgroundColor = "rgba("+this.red+","+this.green+","+this.blue+","+this.br/100+")";
-		  },
-		  onOffClick: function(event){
-			  
-        if(this.on){
-          this.state = this.lightState.create().off().rgb(this.red, this.green, this.blue).brightness(0);
-			this.api.setLightState(2, this.state).done
-          this.on = false;
-        }else{          
-          this.state = this.lightState.create().on().rgb(this.red, this.green, this.blue).brightness(this.br);
-			this.api.setLightState(2, this.state).done
-          this.on = true;
-        }
-		  } ,
-		  
-		  rainbowClick: function(event){
-			  
-        this.state = this.lightState.create().on().effect('colorloop');
-			this.api.setLightState(2, this.state).done
-        this.rainbow = true;
-        //this.$.preview.className = "preview rainbowFiling";
-			  
-		  }
-		  
-		  
-		  
-		  
-	}
-	  /*
-    var red = 254,
-        green = 254,
-        blue = 254,
-        br = 100;
-    var on = true,
-        rainbow = true;
+     title:"Hue me up",
 
-    Polymer({
-      LightClick: function(event, detail, sender) {
-        var value = (event.clientX - (event.target.offsetParent.offsetLeft + event.target.offsetParent.offsetParent.offsetLeft))/event.target.clientWidth;
+     host:"192.168.1.99",
+     username:"1ce4f66515af39672026123122691893",
+     api:undefined,
+     state:undefined,
+     HueApi: undefined,
+     lightState: undefined,
+     rainbow: false,
+     blue: 254,
+     green: 254,
+     red: 254,
+     br: 100,
+     on: true,
 
-        if(rainbow){
-            rainbow= false;
-            this.fire('valueChanged', {red: red, green: green, blue: blue, br: 0});
-            this.$.preview.className = "preview";
-        }
+     init: function() {
 
-        switch(sender.id){
-          case 'slider_red':
-            red = Math.round(255*value);
-            break;
-          case 'slider_green':
-            green = Math.round(255*value);
-            break;
-          case 'slider_blue':
-            blue = Math.round(255*value);
-            break;
-          case 'slider_light':
-            br = Math.round(100*value);
-            break;
-        }
-        this.fire('valueChanged', {red: red, green: green, blue: blue, br: br});
-        
-        //Update preview:
-        console.log("rgb("+red+","+green+","+blue+")");
-        this.$.preview.style.backgroundColor = "rgb("+red+","+green+","+blue+")";
-        this.$.preview.style.opacity = br;
-      },
-      OnOffClick: function(event, detail, sender){
-        if(on){
-          this.fire('valueChanged', {red: red, green: green, blue: blue, br: 0});
-          on = false;
-        }else{          
-          this.fire('valueChanged', {red: red, green: green, blue: blue, br: br});
-          on = true;
-        }
-      },
-      RainbowClick: function(event, detail, sender){
-        this.fire('valueChanged', {red: -1, green: -1, blue: -1, br: -1});
-        rainbow = true;
-        this.$.preview.className = "preview rainbowFiling";
-      }
-    });
-*/
-  </script>
+      var hue=require("node-hue-api");
+      this.HueApi = hue.HueApi;
+      this.lightState = hue.lightState;
+      this.api=new this.HueApi(this.host, this.username);
+    },
+    lightClick: function(event){
+     var pointer = window.document.getElementById('pointer');
+     if (pointer.style.display == 'block') {
+      var position = pointer.offsetLeft + pointer.clientWidth/2;
+    } else {
+      var position = event.clientX;
+    }
+    var value = (position - (event.target.offsetParent.offsetLeft + event.target.offsetParent.offsetParent.offsetLeft))/event.target.clientWidth;
+
+
+    if(this.rainbow){
+      this.rainbow= false;
+      this.state = this.lightState.create().off().rgb(this.red, this.green, this.blue).brightness(this.br);
+      this.api.setLightState(2, this.state).done
+      window.document.getElementById('preview').className = "preview";
+    }
+
+    var ident = event.target.id || event.target.parentNode.id; 
+    switch(event.target.id){
+      case 'slider_red':
+      this.red = Math.round(254*value);
+      break;
+      case 'slider_green':
+      this.green = Math.round(254*value);
+      break;
+      case 'slider_blue':
+      this.blue = Math.round(254*value);
+      break;
+      case 'slider_light':
+      this.br = Math.round(100*value);
+      break;
+    }
+
+    this.state = this.lightState.create().on().rgb(this.red, this.green, this.blue).brightness(this.br);
+    this.api.setLightState(2, this.state).done;
+    window.document.getElementById('preview').style.backgroundColor = "rgba("+this.red+","+this.green+","+this.blue+","+this.br/100+")";
+  },
+  onOffClick: function(event){
+
+    if(this.on){
+      this.state = this.lightState.create().off().rgb(this.red, this.green, this.blue).brightness(0);
+      this.api.setLightState(2, this.state).done
+      this.on = false;
+    }else{          
+      this.state = this.lightState.create().on().rgb(this.red, this.green, this.blue).brightness(this.br);
+      this.api.setLightState(2, this.state).done
+      this.on = true;
+    }
+  } ,
+
+  rainbowClick: function(event){
+
+    this.state = this.lightState.create().on().effect('colorloop');
+    this.api.setLightState(2, this.state).done
+    this.rainbow = true;
+    window.document.getElementById('preview').className = "preview rainbowFiling";
+
+  }
+}
+</script>

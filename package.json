@@ -7,7 +7,7 @@
 	"toolbar":false,
 	"width":800,
 	"height":600,
-	"kiosk":true
+	"kiosk":false
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,6 +23,9 @@
   },
   "homepage": "https://github.com/LeapMote/LeapMote",
   "dependencies": {
-    "leapjs": "^0.6.2"
+    "leapjs": "^0.6.2",
+    "jquery": "^2.1.1",
+    "node-hue-api": "^0.2.3",
+    "winston": "^0.8.3" 
   }
 }
