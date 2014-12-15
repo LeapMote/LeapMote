@@ -105,62 +105,62 @@
       color-stop(1.00, violet));
   }
 </style>
-<div class="control">
-  <div class="left">
-    <div id="slider_red" class="slider red_gradient" onclick="plugin.lightClick(event)">
-    </div>
-    <div id="slider_green" class="slider green_gradient" onclick="plugin.lightClick(event);">
-    </div>
-    <div id="slider_blue" class="slider blue_gradient" onclick="plugin.lightClick(event);">
-    </div>
-    <div id="slider_light" class="slider brightness_gradient" onclick="plugin.lightClick(event);">
+
+
+<div class="left">
+  <div id="slider_red" class="slider red_gradient" onclick="plugin.lightClick(event)">
+  </div>
+  <div id="slider_green" class="slider green_gradient" onclick="plugin.lightClick(event);">
+  </div>
+  <div id="slider_blue" class="slider blue_gradient" onclick="plugin.lightClick(event);">
+  </div>
+  <div id="slider_light" class="slider brightness_gradient" onclick="plugin.lightClick(event);">
+  </div>
+</div>
+<div class="right">
+  <div id="preview_back"><div id="preview" class="preview"></div></div>
+  <div id="rainbow" class="rainbow" onclick="plugin.rainbowClick(event);">...</div>
+  <div class="on_off" onclick="plugin.onOffClick(event);">
+    <div>ON/
+      <br/>OFF</div>
     </div>
   </div>
-  <div class="right">
-    <div id="preview_back"><div id="preview" class="preview"></div></div>
-    <div id="rainbow" class="rainbow" onclick="plugin.rainbowClick(event);">...</div>
-    <div class="on_off" onclick="plugin.onOffClick(event);">
-      <div>ON/
-        <br/>OFF</div>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <script>
-   window.plugin = {
+<script>
+ window.plugin = {
 
-     title:"Hue me up",
+  title:"Hue me up",
+  host:"192.168.1.99",
+  username:"1ce4f66515af39672026123122691893",
+  api:undefined,
+  state:undefined,
+  HueApi: undefined,
+  lightState: undefined,
+  rainbow: false,
+  red: 250,
+  green: 250,
+  blue: 250,
+  br: 80,
+  on: true,
 
-     host:"192.168.1.99",
-     username:"1ce4f66515af39672026123122691893",
-     api:undefined,
-     state:undefined,
-     HueApi: undefined,
-     lightState: undefined,
-     rainbow: false,
-     blue: 254,
-     green: 254,
-     red: 254,
-     br: 100,
-     on: true,
+  init: function() {
 
-     init: function() {
+    var hue=require("node-hue-api");
+    this.HueApi = hue.HueApi;
+    this.lightState = hue.lightState;
+    this.api=new this.HueApi(this.host, this.username);
+  },
 
-      var hue=require("node-hue-api");
-      this.HueApi = hue.HueApi;
-      this.lightState = hue.lightState;
-      this.api=new this.HueApi(this.host, this.username);
-    },
-    lightClick: function(event){
-     var pointer = window.document.getElementById('pointer');
-     if (pointer.style.display == 'block') {
+  lightClick: function(event){
+    var pointer = window.document.getElementById('pointer');
+    if (pointer.style.display == 'block')
       var position = pointer.offsetLeft + pointer.clientWidth/2;
-    } else {
+    else
       var position = event.clientX;
-    }
+    
     var value = (position - (event.target.offsetParent.offsetLeft + event.target.offsetParent.offsetParent.offsetLeft))/event.target.clientWidth;
-
-
+  
     if(this.rainbow){
       this.rainbow= false;
       this.state = this.lightState.create().off().rgb(this.red, this.green, this.blue).brightness(this.br);
@@ -188,8 +188,8 @@
     this.api.setLightState(2, this.state).done;
     window.document.getElementById('preview').style.backgroundColor = "rgba("+this.red+","+this.green+","+this.blue+","+this.br/100+")";
   },
-  onOffClick: function(event){
 
+  onOffClick: function(event){
     if(this.on){
       this.state = this.lightState.create().off().rgb(this.red, this.green, this.blue).brightness(0);
       this.api.setLightState(2, this.state).done
@@ -202,12 +202,10 @@
   } ,
 
   rainbowClick: function(event){
-
     this.state = this.lightState.create().on().effect('colorloop');
     this.api.setLightState(2, this.state).done
     this.rainbow = true;
     window.document.getElementById('preview').className = "preview rainbowFiling";
-
   }
 }
 </script>
